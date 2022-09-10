@@ -5,3 +5,21 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+require 'faker'
+
+# Destroy existing products
+Product.destroy_all
+
+# Create products
+puts "Creating products..."
+i = 1
+100.times do
+  puts "Product #{i} - generated"
+  name = Faker::Coffee.blend_name
+  brand = Faker::Restaurant.type
+  description = Faker::Restaurant.description
+  product = Product.new(name: name, brand: brand, price: rand(0..100), description: description)
+  product.save!
+  i += 1
+end
+puts "Products created."
